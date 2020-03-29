@@ -1,5 +1,5 @@
 const connection = require('../database/connection');
-const crypto = require('crypto');
+const generateUniqueId = require('../utils/generateUniqueId');
 
 //      ** o programa deve esperar a operacao connection('ongs')... para entao prosseguir com a execucao
 module.exports = {
@@ -12,8 +12,8 @@ module.exports = {
     async create(request, response) {
         // os campos preenchidos no JSON sao repassados a seus respectivos campos na aplicacao
         const { name, email, whatsapp, city, uf } = request.body;
-        // gera um id aleatorio  
-        const id = crypto.randomBytes(4).toString('HEX');
+    
+        const id = generateUniqueId();
 
         await connection('ongs').insert({
             id,
